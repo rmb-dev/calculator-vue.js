@@ -1,5 +1,6 @@
 <template>
   <div class="calculator">
+
     <div class="display">{{current || '0'}}</div>
     <div @click="clear" class="btn">C</div>
     <div @click="sign" class="btn">+/-</div>
@@ -20,6 +21,7 @@
     <div @click="append('0')" class="btn zero">0</div>
     <div @click="dot" class="btn">.</div>
     <div @click="equal" class="btn operator">=</div>
+
   </div>
 </template>
 
@@ -98,7 +100,7 @@ export default {
 }
 .display {
   grid-column: 1 / 5;
-  background-color: #333;
+  background-color: #4fc08d;
   color: white;
 }
 .zero {
@@ -109,7 +111,7 @@ export default {
   border: 1px solid #999;
 }
 .operator {
-  background-color: orange;
+  background-color: #34495e;
   color: white;
 }
 </style>
