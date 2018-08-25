@@ -1,19 +1,19 @@
 <template>
   <div class="calculator">
 
-    <div class="display">{{current || '0'}}</div>
-    <div @click="clear" class="btn">C</div>
+    <div class="display">{{current || '0'}}</div> // output number zero - if its not defined
+    <div @click="clear" class="btn">AC</div>
     <div @click="sign" class="btn">+/-</div>
     <div @click="percent" class="btn">%</div>
     <div @click="divide" class="btn operator">÷</div>
-    <div @click="append('7')" class="btn">7</div>
+    <div @click="append('7')" class="btn">7</div>  // using APPEND method to show the string with number
     <div @click="append('8')" class="btn">8</div>
     <div @click="append('9')" class="btn">9</div>
     <div @click="times" class="btn operator">x</div>
     <div @click="append('4')" class="btn">4</div>
     <div @click="append('5')" class="btn">5</div>
     <div @click="append('6')" class="btn">6</div>
-    <div @click="minus" class="btn operator">-</div>
+    <div @click="subtract" class="btn operator">-</div>
     <div @click="append('1')" class="btn">1</div>
     <div @click="append('2')" class="btn">2</div>
     <div @click="append('3')" class="btn">3</div>
@@ -30,31 +30,31 @@ export default {
   data() {
     return {
       previous: null,
-      current: '',
+      current: '',  // renderring current data
       operator: null,
-      operatorClicked: false,
+      operatorClicked: false,  // boolean operator
     }
   },
   methods: {
     clear() {
-      this.current = '';
+      this.current = '';  // define CLEAR method
     },
     sign() {
       this.current = this.current.charAt(0) === '-' ?
         this.current.slice(1) : `-${this.current}`;
     },
     percent() {
-      this.current = `${parseFloat(this.current) / 100}`;
+      this.current = `${parseFloat(this.current) / 100}`;  //callback function
     },
-    append(number) {
+    append(number) {    // implementing numbers and taking them as an argument
       if (this.operatorClicked) {
         this.current = '';
-        this.operatorClicked = false;
+        this.operatorClicked = false;  // setting back to empty state
       }
-      this.current = `${this.current}${number}`;
+      this.current = `${this.current}${number}`;  // joining to strings togheter
     },
     dot() {
-      if (this.current.indexOf('.') === -1) {
+      if (this.current.indexOf('.') === -1) {  // making sure that dot doesn't append twise
         this.append('.');
       }
     },
@@ -70,7 +70,7 @@ export default {
       this.operator = (a, b) => a * b;
       this.setPrevious();
     },
-    minus() {
+    subtract() {
       this.operator = (a, b) => a - b;
       this.setPrevious();
     },
@@ -78,12 +78,12 @@ export default {
       this.operator = (a, b) => a + b;
       this.setPrevious();
     },
-    equal() {
+    equal() {  // run that operator against previous and the current
       this.current = `${this.operator(
         parseFloat(this.current),
         parseFloat(this.previous)
       )}`;
-      this.previous = null;
+      this.previous = null;  // resetting previous
     }
   }
 }
@@ -92,14 +92,14 @@ export default {
 <style scoped>
 .calculator {
   margin: 0 auto;
-  width: 400px;
-  font-size: 40px;
+  width: 600px;
+  font-size: 50px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(50px, auto);
+  grid-template-columns: repeat(4, 1fr);  // 4 equal rows
+  grid-auto-rows: minmax(100px, auto);
 }
 .display {
-  grid-column: 1 / 5;
+  grid-column: 1 / 5;  // column take entire first row
   background-color: #4fc08d;
   color: white;
 }
